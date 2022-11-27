@@ -37,8 +37,8 @@ def html_tag(tag):
 
 #closures
 
-def outer_func():
-    msg = 'Hi'
+def outer_func(msg1):
+    msg = msg1
     def inner_func():
         print(msg)
     return inner_func
@@ -70,3 +70,16 @@ def sub(x,y):
 # add_logger(5,5)
 # sub_logger(50,25)
 
+#decorator function
+
+def decorator_function(original_functon):
+    def wrapper_function():
+        return original_functon()
+    return wrapper_function
+
+def display():
+    print('Display function run')
+
+decorated_display =decorator_function(display)
+
+decorated_display()
