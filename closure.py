@@ -73,13 +73,35 @@ def sub(x,y):
 #decorator function
 
 def decorator_function(original_functon):
-    def wrapper_function():
-        return original_functon()
+    def wrapper_function(*args, **kwargs):
+        return original_functon(*args, **kwargs)
     return wrapper_function
 
+@decorator_function
 def display():
     print('Display function run')
 
-decorated_display =decorator_function(display)
+@decorator_function
+def display_info(name,age):
+    print('Dispaly info run with aruments({},{})'.format(name,age))
 
-decorated_display()
+display_info('john',25)
+display()
+
+
+
+#decorator esxample 2 using logger
+import logging
+logging.basicConfig(filename='console.log',level=logging.INFO)
+
+def logger(func):
+    def log_func(*args):
+        logging.info('Runnng "{}" with arguments {}'.format(func.__name__, args))
+        print(func(*args))
+    return log_func
+
+def add(x,y):
+    return x+y
+
+def sub(x,y):
+    return x -y
