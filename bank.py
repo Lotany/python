@@ -6,7 +6,7 @@ class Bank:
         self.m_pass = m_pass
 class Client(Bank):
     #inatance attribute
-    def __init__(self, name, account_no, __pin=0000, balance = 0,login=1,logout =0):
+    def __init__(self, name, account_no, __pin=1005, balance = 0,login=1,logout =0):
         super().__init__(name, account_no)
         self.name =name
         self.account_no =account_no
@@ -45,7 +45,7 @@ class Client(Bank):
             print("Wrong credentials: ")
             quit()
         else:
-            print(f"{self.name} your balance is {self.balance}")
+            print(self.check_balance())
             print("Withdraw")
             var3 =int(input())
             self.balance -= var3
