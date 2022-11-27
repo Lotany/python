@@ -1,57 +1,62 @@
 class Bank:
     #instance attribute
-    def __init__(self,name, account_no):
-        self.name= name
-        self.account_no =account_no
-
-class Employee(Bank):
-    def __init__(self, id,account_no, name,dept_name,job_allocation,rating, mistake):
-        super().__init__(id, name,account_no)
-        self.id =id
-        self.name=name
-        self.account_no = account_no
-        self.dept_name =dept_name
-        self.job_allocation =job_allocation
-        self.rating =rating
-        self.mistake = mistake
-
-    def view_emp(self):
-        print(self.name)
-
-    def add_bonus(self):
-        if self.rating >60:
-            self.rating +=1000
-            print(self.rating)
-
-    def warn_emplyoye(self):
-        if self.mistake >10:
-            print("You got two warnings left")
-class client(Bank):
-    def __init__(self,name, account_no, __pin, balance):
-        super().__init__(id, name, account_no, __pin, balance)
+    def __init__(self,name, account_no,m_pass=1111):
         self.name =name
         self.account_no = account_no
-        self._pin =__pin
-        self._balance =balance
+        self.m_pass = m_pass
+class Client(Bank):
+    #inatance attribute
+    def __init__(self, name, account_no, __pin=0000, balance = 0,login=1,logout =0):
+        super().__init__(name, account_no)
+        self.name =name
+        self.account_no =account_no
+        self.__pin =__pin
+        self.balance = balance
+        self.login =login
+        self.logout =logout
 
-    def deposit(self,amount):
-        self._balance += amount
+    #instace method
+    def deposit(self, amount):
+        if amount < 0:
+            print("Cannot depoesit a negative value....")
+        else:
+            self.balance +=amount
 
     def withdraw(self, amount):
-        if amount > self._balance:
-            print("Cannot make a withdraw")
-        elif amount < 0:
-            print("cannot withdraw a negative number")
+        if self.balance <amount:
+            print('Not sufficient money to wthdraw please try again.....')
         else:
-            self._balance-=amount
+            self.balance +=amount
+    
+    def check_balance(self):
+        query = int(input("Enter pin to  check balance: "))
+        if query == self.__pin:
+            print(f"Your balance is: {self.balance}")
+        else:
+            print(f"Wrong password try again")
 
-    def checkbalance(self):
-        query = int(input("Enter pin to viewe balance"))
-        if query == self._pin:
-            print(self._balance)
+    def log_in(self):
+        print('Enter username')
+        var = input()
+        print('Enter pass: ')
+        var1 = int(input())
 
-list = [Employee(1,1234,"lotan","Human Resource", "Interview",5,70),client("able",1234,0000,2000)]
+        if var != self.name and var1 !=self.m_pass:
+            print("Wrong credentials: ")
+            quit()
+        else:
+            print(f"{self.name} your balance is {self.balance}")
+            print("Withdraw")
+            var3 =int(input())
+            self.balance -= var3
+        print(f"Your balance is now {self.balance} ")
 
-def call(list):
-    for i in list:
-        i.view_emp()
+mylist =[Client("Lotan",1234)]
+
+bank1 = Client("lotan",1234)
+
+bank1.deposit(20000)
+
+bank1.log_in()
+
+
