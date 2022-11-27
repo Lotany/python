@@ -5,5 +5,10 @@ def square_numbers(nums):
 
 my_nums =square_numbers([1,2,3,4,5,6])
 
-for num in my_nums:
-    print(num)
+# for num in my_nums:
+#     print(num)
+
+
+def csv_reader(file_name):
+    for row in open(file_name, 'r'):
+        yield row
